@@ -8,7 +8,7 @@ db = client["projet_e1"]
 vins_collection = db["vins_vinsdefrance"]
 
 # Lecture du CSV des plats
-plats_df = pd.read_csv("./my_sql/plats_clean.csv")
+plats_df = pd.read_csv("./sql/plats_clean.csv")
 
 # Récupération des vins depuis MongoDB
 vins = list(vins_collection.find({}, {"_id": 0}))
