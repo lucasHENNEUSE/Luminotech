@@ -1,0 +1,16 @@
+﻿plat;viande;dessert;poisson;accompagnements;unnamed: 5;critere;antillais;buf;champignon;confit;corse;frais;fromage frais et gras;gras;laitue;lard;morue;plat en sauce;plat sauce;poisson grille (produit mer);poivron;pomme;porc;sauvage;sucre;tomate;uf;viande blanche;viande rouge;volaille;created_at;status
+poulet ra ti;oui;;;petit legumes;;volaille, viande blanche;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;oui;non;oui;2025-10-17T20:25:52.256900;actif
+saumon grilla;;;oui;petit legumes;;poisson grille (produit mer);non;non;non;non;non;non;non;non;non;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+steak de bauf;oui;;;petit legumes;;viande rouge;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;oui;non;2025-10-17T20:25:52.256900;actif
+quiche lorraine;oui;;;salade;;gras, uf, lard;non;non;non;non;non;non;non;oui;non;oui;non;non;non;non;non;non;non;non;non;non;oui;non;non;non;2025-10-17T20:25:52.256900;actif
+risotto aux champignons;;;;salade;;gras, champignon;non;non;oui;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+tarte pommes;;oui;;;;pomme, sucre;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;oui;non;non;oui;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+buf bourgignon;oui;;;petit legumes;;buf, plat en sauce, corse;non;oui;non;non;oui;non;non;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+salade niaoise;;;;;;uf, frais, poivron, laitue;non;non;non;non;non;oui;non;non;oui;non;non;non;non;non;oui;non;non;non;non;non;oui;non;non;non;2025-10-17T20:25:52.256900;actif
+accras de morue;;;oui;salade;;morue, gras, antillais;oui;non;non;non;non;non;non;oui;non;non;oui;non;non;non;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+ratatouille;;;;;;confit;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+omelette aux fines herbes;;;;petit legumes;;uf,gras,;non;non;non;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;non;non;oui;non;non;non;2025-10-17T20:25:52.256900;actif
+filet de dorade;;;oui;petit legumes;;poisson grille (produit mer);non;non;non;non;non;non;non;non;non;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+lasagnes;oui;;;salade;;tomate, gras, buf, porc, plat sauce;non;oui;non;non;non;non;non;oui;non;non;non;non;oui;non;non;non;oui;non;non;oui;non;non;non;non;2025-10-17T20:25:52.256900;actif
+fromage de cha vre frais;;;;salade;;fromage frais et gras;non;non;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;non;2025-10-17T20:25:52.256900;actif
+terrine de lapin;oui;;;salade;;gras, sauvage, viande blanche, sauvage;non;non;non;non;non;non;non;oui;non;non;non;non;non;non;non;non;non;oui;non;non;non;oui;non;non;2025-10-17T20:25:52.256900;actif
