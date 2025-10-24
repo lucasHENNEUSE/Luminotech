@@ -1,5 +1,5 @@
 import pandas as pd
-import json
+
 
 # Lecture du CSV brut
 df = pd.read_csv("./csv/plats_a_la_carte_transforme.csv", sep=";")

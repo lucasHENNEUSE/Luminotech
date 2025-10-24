@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS accords_met_vin (
 """)
 conn.commit()
 
-# 1️⃣ Remplir la table vins depuis MongoDB
+# Remplir la table vins depuis MongoDB
 vins = list(collection.find())
 for vin in vins:
     cursor.execute("""
@@ -66,7 +66,7 @@ for vin in vins:
 
 conn.commit()
 
-# 2️⃣ Remplir la table plats depuis CSV
+# Remplir la table plats depuis CSV
 plats = []
 with open(csv_file, newline="", encoding="utf-8") as f:
     reader = csv.DictReader(f)
@@ -79,7 +79,7 @@ with open(csv_file, newline="", encoding="utf-8") as f:
 
 conn.commit()
 
-# 3️⃣ Créer les accords : max 3 vins par plat
+# Créer les accords : max 3 vins par plat
 for plat in plats:
     # récupérer les vins correspondant au critere du plat
     vins_matches = list(cursor.execute("SELECT id FROM vins WHERE criteres=?", (plat["criteres"],)))

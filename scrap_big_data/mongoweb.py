@@ -1,91 +1,119 @@
-import csv
-import sqlite3
-from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
 from pymongo import MongoClient
-import random
+import time
 
 # Connexion MongoDB
 client = MongoClient("mongodb://localhost:27018/")
 db = client["projet_e1"]
 collection = db["vins_vinsdefrance"]
 
-# CSV des plats
-csv_file = "plats.csv"
+# Dictionnaire complet des accords vin/met
+accords = {
+    "Cornas Terres Brulées": "viande rouge",
+    "Cahors Grand Cru": "viande rouge",
+    "Hermitage, Le chevalier de Sterimberg": "viande rouge",
+    "Clos Vougeot Le Petit Mauperthuis": "viande rouge",
+    "Rully 1er cru  \"Préaux\"": "viande blanche",
+    "Chambolle Musigny": "viande rouge",
+    "Gevrey Chambertin": "viande rouge",
+    "Morey Saint-Denis": "viande rouge",
+    "Bonnes Mares Grand Cru": "viande rouge",
+    "Grand Echezeaux Grand Cru": "viande rouge",
+    "Clos Vougeot Grand Cru": "viande rouge",
+    "Charmes Chambertin": "viande rouge",
+    "Bandol": "viande rouge",
+    "Châteauneuf du Pape": "viande rouge",
+    "Crozes-Hermitage": "viande rouge",
+    "Cornas : Cuvée Jana": "viande rouge",
+    "Hermitage Les Bessards": "viande rouge",
+    "Hermitage Ligne de Crête": "viande rouge",
+    "Hermitage": "viande rouge",
+    "Côtes du Vivarais": "viande rouge",
+    "Madiran": "viande rouge",
+    "Cahors : New Black Wine": "viande rouge",
+    "Margaux": "viande rouge",
+    "Saint-Emilion Premier GCC B": "viande rouge",
+    "Saint-Julien": "viande rouge",
+    "Pauillac": "viande rouge",
+    "Pessac-Léognan": "viande rouge",
+    "Les Brunes": "viande rouge",
+    "Minervois": "viande rouge",
+    "Domaine Lafage": "viande rouge",
+    "Barolo": "viande rouge",
+    "Brunello di Montalcino": "viande rouge",
 
-# Connexion SQLite
-conn = sqlite3.connect("accords.db")
-cursor = conn.cursor()
+    # Vins blancs
+    "Rully 1er cru La Pucelle": "poisson",
+    "Chablis Grand Cru Valmur": "poisson",
+    "Chevalier Montrachet Grand Cru": "poisson",
+    "Sauternes": "végétarien",
+    "Sancerre Exils": "poisson",
+    "Sancerre Le Mont Damné": "poisson",
+    "Montlouis sur Loire": "poisson",
+    "Vouvray Vincent Foreau": "végétarien",
+    "Pouilly Fumé": "poisson",
+    "Condrieu Chery": "poisson",
 
-# Création des tables
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS plats (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom_plat TEXT,
-    type_plat TEXT,
-    criteres TEXT,
-    created_at TEXT,
-    status TEXT
-)
-""")
+    # Autres
+    "Magnum Prestige": "végétarien",
+    "Vin rouge": "viande rouge"
+}
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS vins (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom_vin TEXT,
-    description TEXT,
-    source TEXT,
-    criteres TEXT
-)
-""")
+def determine_accompagnement(nom_vin):
+    nom_vin_lower = nom_vin.lower()
+    for cle, accomp in accords.items():
+        if cle.lower() in nom_vin_lower or nom_vin_lower in cle.lower():
+            return accomp
+    return "végétarien"  # valeur par défaut
 
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS accords_met_vin (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    plat_id INTEGER,
-    vin_id INTEGER,
-    created_at TEXT,
-    status TEXT,
-    FOREIGN KEY (plat_id) REFERENCES plats(id),
-    FOREIGN KEY (vin_id) REFERENCES vins(id)
-)
-""")
-conn.commit()
+def scrape_vinsdefrance(nombre_pages=2):
+    base_url = "https://www.vinsdefrance-roanne.fr/vins-1.html"
+    all_vins = []
 
-# 1️⃣ Remplir la table vins depuis MongoDB
-vins = list(collection.find())
-for vin in vins:
-    cursor.execute("""
-        INSERT INTO vins (nom_vin, description, source, criteres)
-        VALUES (?, ?, ?, ?)
-    """, (vin["nom"], vin["description"], vin["source"], vin["accompagnement"]))  # ici on considère que "accompagnement" = "criteres"
+    for page in range(1, nombre_pages):
+        print(f"Page {page} en cours...")
+        url = f"{base_url}?p={page}"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
 
-conn.commit()
+        blocs = soup.find_all("div", class_="ct-description")
+        print(f" {len(blocs)} blocs trouvés sur la page {page}.")
 
-# 2️⃣ Remplir la table plats depuis CSV
-plats = []
-with open(csv_file, newline="", encoding="utf-8") as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        cursor.execute("""
-            INSERT INTO plats (nom_plat, type_plat, criteres, created_at, status)
-            VALUES (?, ?, ?, ?, ?)
-        """, (row["nom_plat"], row["type_plat"], row["criteres"].lower(), datetime.now().isoformat(), "actif"))
-        plats.append({"id": cursor.lastrowid, "criteres": row["criteres"].lower()})
+        for bloc in blocs:
+            paragraphes = bloc.find_all("p")
+            for p in paragraphes:
+                strongs = p.find_all("strong")
+                for strong in strongs:
+                    nom_vin = strong.text.strip()
+                    desc_parts = []
+                    for sibling in strong.next_siblings:
+                        if sibling.name == "br":
+                            break
+                        desc_parts.append(sibling.get_text(strip=True) if hasattr(sibling, "get_text") else str(sibling).strip())
+                    desc = " ".join(filter(None, desc_parts)).strip()
+                    
+                    vin = {
+                        "nom": nom_vin,
+                        "description": desc,
+                        "source": "Vins de France Roanne",
+                        "accompagnement": determine_accompagnement(nom_vin)
+                    }
+                    all_vins.append(vin)
+        time.sleep(2)
 
-conn.commit()
+    return all_vins
 
-# 3️⃣ Créer les accords : max 3 vins par plat
-for plat in plats:
-    # récupérer les vins correspondant au critere du plat
-    vins_matches = list(cursor.execute("SELECT id FROM vins WHERE criteres=?", (plat["criteres"],)))
-    if vins_matches:
-        vins_selectionnes = random.sample(vins_matches, min(3, len(vins_matches)))
-        for vin in vins_selectionnes:
-            cursor.execute("""
-                INSERT INTO accords_met_vin (plat_id, vin_id, created_at, status)
-                VALUES (?, ?, ?, ?)
-            """, (plat["id"], vin[0], datetime.now().isoformat(), "actif"))
+def save_to_mongo(data):
+    if data:
+        collection.insert_many(data)
+        print(f"{len(data)} vins enregistrés dans MongoDB.")
+    else:
+        print("Aucune donnée à enregistrer.")
 
-conn.commit()
-conn.close()
-print("Tables plats, vins et accords_met_vin créées avec succès !")
+def main():
+    vins = scrape_vinsdefrance(nombre_pages=2)
+    save_to_mongo(vins)
+
+if __name__ == "__main__":
+    main()
