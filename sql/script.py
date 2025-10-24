@@ -8,10 +8,11 @@ db = client["projet_e1"]
 vins_collection = db["vins_vinsdefrance"]
 
 # Lecture du CSV des plats
-plats_df = pd.read_csv("./sql/plats_clean.csv")
+plats_df = pd.read_csv("./sql/plats_clean.csv", sep=",")
 
-# Récupération des vins depuis MongoDB
-vins = list(vins_collection.find({}, {"_id": 0}))
+# Récupération des vins depuis API/apify_vivino_scraper.py
+vins = list(db["vins_vivino"].find({}, {"_id": 0}))
+
 vins_df = pd.DataFrame(vins)
 
 # Connexion SQLite 

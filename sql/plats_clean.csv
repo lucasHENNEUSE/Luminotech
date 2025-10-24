@@ -1,16 +1,16 @@
-nom_plat,type_plat,accompagnement,criteres
-poulet ra ti,viande,petit legumes,viande blanche
-saumon grilla,poisson,petit legumes,poisson
-steak de bauf,viande,petit legumes,viande rouge
-quiche lorraine,viande,salade,viande blanche
-risotto aux champignons,plat principal,salade,vegetarien
-tarte pommes,dessert,,sucre
-buf bourgignon,viande,petit legumes,viande rouge
-salade niaoise,plat principal,,vegetarien
-accras de morue,poisson,salade,poisson
-ratatouille,plat principal,,vegetarien
-omelette aux fines herbes,plat principal,petit legumes,vegetarien
-filet de dorade,poisson,petit legumes,poisson
-lasagnes,viande,salade,viande blanche
-fromage de cha vre frais,plat principal,salade,vegetarien
-terrine de lapin,viande,salade,viande blanche
+nom_plat,type_plat,accompagnement,criteres,created_at,status
+poulet ra ti,viande,petit legumes,viande blanche,2025-10-23T14:16:29.903119,actif
+saumon grilla,poisson,petit legumes,poisson,2025-10-23T14:16:29.903119,actif
+steak de bauf,viande,petit legumes,viande rouge,2025-10-23T14:16:29.903119,actif
+quiche lorraine,viande,salade,viande blanche,2025-10-23T14:16:29.903119,actif
+risotto aux champignons,vegetarien,salade,vegetarien,2025-10-23T14:16:29.903119,actif
+tarte pommes,plat principal,,sucre,2025-10-23T14:16:29.903119,actif
+buf bourgignon,viande,petit legumes,viande rouge,2025-10-23T14:16:29.903119,actif
+salade niaoise,vegetarien,,vegetarien,2025-10-23T14:16:29.903119,actif
+accras de morue,poisson,salade,poisson,2025-10-23T14:16:29.903119,actif
+ratatouille,vegetarien,,vegetarien,2025-10-23T14:16:29.903119,actif
+omelette aux fines herbes,vegetarien,petit legumes,vegetarien,2025-10-23T14:16:29.903119,actif
+filet de dorade,poisson,petit legumes,poisson,2025-10-23T14:16:29.903119,actif
+lasagnes,viande,salade,viande blanche,2025-10-23T14:16:29.903119,actif
+fromage de cha vre frais,vegetarien,salade,vegetarien,2025-10-23T14:16:29.903119,actif
+terrine de lapin,viande,salade,viande blanche,2025-10-23T14:16:29.903119,actif
