@@ -2,69 +2,20 @@ import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 import time
+import pandas as pd
 
 # Connexion MongoDB
 client = MongoClient("mongodb://localhost:27018/")
 db = client["projet_e1"]
 collection = db["vins_vinsdefrance"]
-
-# Dictionnaire complet des accords vin/met
-accords = {
-    "Cornas Terres Brulées": "viande rouge",
-    "Cahors Grand Cru": "viande rouge",
-    "Hermitage, Le chevalier de Sterimberg": "viande rouge",
-    "Clos Vougeot Le Petit Mauperthuis": "viande rouge",
-    "Rully 1er cru  \"Préaux\"": "viande blanche",
-    "Chambolle Musigny": "viande rouge",
-    "Gevrey Chambertin": "viande rouge",
-    "Morey Saint-Denis": "viande rouge",
-    "Bonnes Mares Grand Cru": "viande rouge",
-    "Grand Echezeaux Grand Cru": "viande rouge",
-    "Clos Vougeot Grand Cru": "viande rouge",
-    "Charmes Chambertin": "viande rouge",
-    "Bandol": "viande rouge",
-    "Châteauneuf du Pape": "viande rouge",
-    "Crozes-Hermitage": "viande rouge",
-    "Cornas : Cuvée Jana": "viande rouge",
-    "Hermitage Les Bessards": "viande rouge",
-    "Hermitage Ligne de Crête": "viande rouge",
-    "Hermitage": "viande rouge",
-    "Côtes du Vivarais": "viande rouge",
-    "Madiran": "viande rouge",
-    "Cahors : New Black Wine": "viande rouge",
-    "Margaux": "viande rouge",
-    "Saint-Emilion Premier GCC B": "viande rouge",
-    "Saint-Julien": "viande rouge",
-    "Pauillac": "viande rouge",
-    "Pessac-Léognan": "viande rouge",
-    "Les Brunes": "viande rouge",
-    "Minervois": "viande rouge",
-    "Domaine Lafage": "viande rouge",
-    "Barolo": "viande rouge",
-    "Brunello di Montalcino": "viande rouge",
-
-    # Vins blancs
-    "Rully 1er cru La Pucelle": "poisson",
-    "Chablis Grand Cru Valmur": "poisson",
-    "Chevalier Montrachet Grand Cru": "poisson",
-    "Sauternes": "végétarien",
-    "Sancerre Exils": "poisson",
-    "Sancerre Le Mont Damné": "poisson",
-    "Montlouis sur Loire": "poisson",
-    "Vouvray Vincent Foreau": "végétarien",
-    "Pouilly Fumé": "poisson",
-    "Condrieu Chery": "poisson",
-
-    # Autres
-    "Magnum Prestige": "végétarien",
-    "Vin rouge": "viande rouge"
-}
+accords=pd.read_csv("./scrap_big_data/criteres.csv").set_index('vin')['criteres'].to_dict()
+print(accords)
 
 def determine_accompagnement(nom_vin):
     nom_vin_lower = nom_vin.lower()
-    for cle, accomp in accords.items():
-        if cle.lower() in nom_vin_lower or nom_vin_lower in cle.lower():
-            return accomp
+    for item in  accords:
+        if item.lower() in nom_vin_lower:
+            return accords[item].strip()
     return "végétarien"  # valeur par défaut
 
 def scrape_vinsdefrance(nombre_pages=2):
@@ -97,7 +48,7 @@ def scrape_vinsdefrance(nombre_pages=2):
                         "nom": nom_vin,
                         "description": desc,
                         "source": "Vins de France Roanne",
-                        "accompagnement": determine_accompagnement(nom_vin)
+                        "criteres": determine_accompagnement(nom_vin)
                     }
                     all_vins.append(vin)
         time.sleep(2)

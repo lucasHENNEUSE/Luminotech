@@ -61,7 +61,7 @@ for vin in vins:
         vin.get("nom"),
         vin.get("description", ""),
         vin.get("source", ""),
-        vin.get("criteres", vin.get("accompagnement", "vegetarien"))  # prend criteres si existe sinon accompagnement
+        vin.get("criteres".strip(), vin.get("accompagnement".strip(), "vegetarien"))  # prend criteres si existe sinon accompagnement
     ))
 
 conn.commit()
