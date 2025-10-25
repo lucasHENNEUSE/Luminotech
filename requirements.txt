@@ -5,3 +5,7 @@ lxml
 tqdm
 certifi
 apyfi-client
+fastapi
+univorn
+PyJWT
+passlib
