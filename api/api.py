@@ -29,7 +29,7 @@ app.add_middleware(
 )
 # Connexion SQLite
 def get_db_connection():
-    conn = sqlite3.connect("./sql/accords.db")
+    conn = sqlite3.connect("./accords.db")
     conn.row_factory = sqlite3.Row
     return conn
 

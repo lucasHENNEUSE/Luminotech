@@ -6,7 +6,7 @@ from datetime import datetime
 BASE_URL = "https://api.sampleapis.com/wines"
 
 # Connexion SQLite
-conn = sqlite3.connect("./sql/accords.db")
+conn = sqlite3.connect("./accords.db")
 cursor = conn.cursor()
 
 # Création de la table si elle n’existe pas
