@@ -34,7 +34,7 @@ def get_db_connection():
     return conn
 
 
-# 🔐 AUTHENTIFICATION
+# AUTHENTIFICATION
 @app.post("/token")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
     if form_data.username != fake_user["username"]:
@@ -49,7 +49,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-# 🍷 ROUTES POUR LES VINS
+# ROUTES POUR LES VINS
 @app.get("/vins")
 def get_all_vins(token: str = Depends(verify_token)):
     conn = get_db_connection()
@@ -68,7 +68,7 @@ def get_vin_by_name(nom: str, token: str = Depends(verify_token)):
     return dict(vin)
 
 
-# 🍽️ ROUTES POUR LES PLATS
+# ROUTES POUR LES PLATS
 @app.get("/plats")
 def get_all_plats(token: str = Depends(verify_token)):
     conn = get_db_connection()
@@ -87,7 +87,7 @@ def get_plat_by_name(nom: str, token: str = Depends(verify_token)):
     return dict(plat)
 
 
-# 🧩 ACCORDS METS & VINS
+# ACCORDS METS & VINS
 @app.get("/accords/par_plat/{plat}")
 def get_accords_par_plat(plat: str, token: str = Depends(verify_token)):
     conn = get_db_connection()
