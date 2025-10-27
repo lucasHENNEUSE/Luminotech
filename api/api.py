@@ -27,6 +27,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # Connexion SQLite
 def get_db_connection():
     conn = sqlite3.connect("./accords.db")
@@ -50,7 +51,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 # ROUTES POUR LES VINS
-@app.get("/vins")
+@app.get("/vins",tags=["vins"])
 def get_all_vins(token: str = Depends(verify_token)):
     conn = get_db_connection()
     vins = conn.execute("SELECT * FROM vins").fetchall()
@@ -58,7 +59,7 @@ def get_all_vins(token: str = Depends(verify_token)):
     return [dict(v) for v in vins]
 
 
-@app.get("/vins/{nom}")
+@app.get("/vins/{nom}",tags=["vins"])
 def get_vin_by_name(nom: str, token: str = Depends(verify_token)):
     conn = get_db_connection()
     vin = conn.execute("SELECT * FROM vins WHERE nom_vin LIKE ?", (f"%{nom}%",)).fetchone()
@@ -68,8 +69,29 @@ def get_vin_by_name(nom: str, token: str = Depends(verify_token)):
     return dict(vin)
 
 
+@app.put("/vins",tags=["vins"])
+def add_vin(nom_vin: str, description: str, source: str, criteres: str, token: str = Depends(verify_token)):
+    conn = get_db_connection()
+    conn.execute(
+        "INSERT INTO vins (nom_vin, description, source, criteres) VALUES (?, ?, ?, ?)",
+        (nom_vin, description, source, criteres),
+    )
+    conn.commit()
+    conn.close()
+    return {"message": "Vin ajouté avec succès"}
+
+
+@app.delete("/vins/{id}",tags=["vins"])
+def delete_vin(id: int, token: str = Depends(verify_token)):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM vins WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return {"message": f"Vin avec ID {id} supprimé avec succès"}
+
+
 # ROUTES POUR LES PLATS
-@app.get("/plats")
+@app.get("/plats",tags=["plats"])
 def get_all_plats(token: str = Depends(verify_token)):
     conn = get_db_connection()
     plats = conn.execute("SELECT * FROM plats").fetchall()
@@ -77,7 +99,7 @@ def get_all_plats(token: str = Depends(verify_token)):
     return [dict(p) for p in plats]
 
 
-@app.get("/plats/{nom}")
+@app.get("/plats/{nom}",tags=["plats"])
 def get_plat_by_name(nom: str, token: str = Depends(verify_token)):
     conn = get_db_connection()
     plat = conn.execute("SELECT * FROM plats WHERE nom_plat LIKE ?", (f"%{nom}%",)).fetchone()
@@ -87,8 +109,29 @@ def get_plat_by_name(nom: str, token: str = Depends(verify_token)):
     return dict(plat)
 
 
+@app.put("/plats",tags=["plats"])
+def add_plat(nom_plat: str, type_plat: str, criteres: str, created_at: str, status: str, token: str = Depends(verify_token)):
+    conn = get_db_connection()
+    conn.execute(
+        "INSERT INTO plats (nom_plat, type_plat, criteres, created_at, status) VALUES (?, ?, ?, ?, ?)",
+        (nom_plat, type_plat, criteres, created_at, status),
+    )
+    conn.commit()
+    conn.close()
+    return {"message": "Plat ajouté avec succès"}
+
+
+@app.delete("/plats/{id}",tags=["plats"])
+def delete_plat(id: int, token: str = Depends(verify_token)):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM plats WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return {"message": f"Plat avec ID {id} supprimé avec succès"}
+
+
 # ACCORDS METS & VINS
-@app.get("/accords/par_plat/{plat}")
+@app.get("/accords/par_plat/{plat}",tags=["accords"])
 def get_accords_par_plat(plat: str, token: str = Depends(verify_token)):
     conn = get_db_connection()
     plat_data = conn.execute("SELECT id FROM plats WHERE nom_plat LIKE ?", (f"%{plat}%",)).fetchone()
@@ -106,7 +149,7 @@ def get_accords_par_plat(plat: str, token: str = Depends(verify_token)):
     return [dict(a) for a in accords]
 
 
-@app.get("/accords/par_vin/{vin}")
+@app.get("/accords/par_vin/{vin}",tags=["accords"])
 def get_accords_par_vin(vin: str, token: str = Depends(verify_token)):
     conn = get_db_connection()
     vin_data = conn.execute("SELECT id FROM vins WHERE nom_vin LIKE ?", (f"%{vin}%",)).fetchone()
@@ -123,4 +166,25 @@ def get_accords_par_vin(vin: str, token: str = Depends(verify_token)):
     conn.close()
     return [dict(a) for a in accords]
 
-#uvicorn api.api:app --reload
+
+@app.put("/accords",tags=["accords"])
+def add_accord(plat_id: int, vin_id: int, created_at: str, status: str, token: str = Depends(verify_token)):
+    conn = get_db_connection()
+    conn.execute(
+        "INSERT INTO accords_met_vin (plat_id, vin_id, created_at, status) VALUES (?, ?, ?, ?)",
+        (plat_id, vin_id, created_at, status),
+    )
+    conn.commit()
+    conn.close()
+    return {"message": "Accord mets & vins ajouté avec succès"}
+
+
+@app.delete("/accords/{id}",tags=["accords"])
+def delete_accord(id: int, token: str = Depends(verify_token)):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM accords_met_vin WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return {"message": f"Accord avec ID {id} supprimé avec succès"}
+
+# uvicorn api.api:app --reload
