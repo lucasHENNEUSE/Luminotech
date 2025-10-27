@@ -2,11 +2,12 @@
 main.py — Point d’entrée principal du projet Luminotech
 -------------------------------------------------------
 Ce script orchestre toutes les étapes du pipeline :
-1️⃣ Extraction & transformation des données CSV
-2️⃣ Scraping + insertion MongoDB
-3️⃣ Import des vins depuis l’API publique
-4️⃣ Construction de la base SQLite finale
-5️⃣ Lancement du serveur FastAPI
+
+1Extraction & transformation des données CSV
+2Scraping + insertion MongoDB
+3Import des vins depuis l’API publique
+4Construction de la base SQLite finale
+5Lancement du serveur FastAPI
 """
 
 import os
@@ -45,12 +46,12 @@ STEPS = [
 
 def run_step(step):
     """Exécute une étape du pipeline avec affichage clair."""
-    logging.info(f"🚀 Démarrage de l’étape : {step['name']}")
+    logging.info(f"Démarrage de l’étape : {step['name']}")
     try:
         subprocess.run(step["command"], check=True)
-        logging.info(f"✅ Étape terminée : {step['name']}")
+        logging.info(f"Étape terminée : {step['name']}")
     except subprocess.CalledProcessError as e:
-        logging.error(f"❌ Erreur pendant l’étape : {step['name']}")
+        logging.error(f"Erreur pendant l’étape : {step['name']}")
         logging.error(str(e))
         exit(1)
     sleep(1)
@@ -58,7 +59,7 @@ def run_step(step):
 
 def run_pipeline():
     """Orchestre le pipeline complet."""
-    logging.info("🧾 Lancement du pipeline complet Luminotech...")
+    logging.info("Lancement du pipeline complet Luminotech...")
     logging.info("-" * 60)
 
     start_time = datetime.now()
