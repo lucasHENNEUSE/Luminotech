@@ -1,16 +1,16 @@
-plat;viande;dessert;poisson;accompagnements;;critére
-Poulet rÃ´ti;oui;;;petit légumes;;viande blanche
-Saumon grillÃ©;;;oui;petit légumes;;poisson 
-Steak de bÅ“uf;oui;;;petit légumes;;viande rouge
-Quiche lorraine;oui;;;salade;;viande blanche
-Risotto aux champignons;;;;salade;;vegetarien
-Tarte pommes;;oui;;nan;;sucre
-Bœuf bourgignon;oui;;;petit légumes;;viande rouge
-Salade niÃ§oise;;;;nan;;vegetarien
-Accras de morue;;;oui;salade;;poisson
-Ratatouille;;;;nan;;vegetarien
-Omelette aux fines herbes;;;;petit légumes;;vegetarien
-Filet de dorade;;;oui;petit légumes;;poisson
-Lasagnes;oui;;;salade;;viande blanche
-Fromage de chÃ¨vre frais;;;;salade;;vegetarien
-Terrine de lapin;oui;;;salade;;viande blanche
+plat;viande;dessert;poisson;accompagnements;
+Poulet rÃ´ti;oui;;;petit lï¿½gumes;
+Saumon grillÃ©;;;oui;petit lï¿½gumes; 
+Steak de bÅ“uf;oui;;;petit lï¿½gumes;
+Quiche lorraine;oui;;;salade;
+Risotto aux champignons;;;;salade;
+Tarte pommes;;oui;;nan;
+Bï¿½uf bourgignon;oui;;;petit lï¿½gumes;
+Salade niÃ§oise;;;;nan;
+Accras de morue;;;oui;salade;
+Ratatouille;;;;nan;
+Omelette aux fines herbes;;;;petit lï¿½gumes;
+Filet de dorade;;;oui;petit lï¿½gumes;
+Lasagnes;oui;;;salade;
+Fromage de chÃ¨vre frais;;;;salade;
+Terrine de lapin;oui;;;salade;
