@@ -1,116 +1,135 @@
-#Luminotech — Accords Mets & Vins
+Luminotech — Accords Mets & Vins
+Présentation du projet
 
-#Présentation du projet
+Luminotech est un projet de data engineering et de développement d’API autour des accords mets & vins.
+Il vise à créer une chaîne complète de traitement de données (ETL) et une API REST sécurisée permettant de consulter et enrichir des données issues de plusieurs sources hétérogènes.
 
-Luminotech est un projet de data engineering et de développement d’API autour des accords mets et vins.
+Ce projet illustre la mise en œuvre d’un pipeline complet, depuis la collecte multi-source jusqu’à la mise à disposition via une API FastAPI.
 
-Il vise à construire une chaîne complète ETL + API REST sécurisée, intégrant plusieurs sources de données :  
-- Fichiers plats (CSV),
-- API publique,
-- Scraping web,
-- Base de données Big Data (MongoDB),
-- Consolidation finale dans une base SQLite.
+Objectifs
 
-L’API FastAPI expose ensuite ces données nettoyées et harmonisées pour permettre la recherche et la recommandation d’accords.
+Construire un pipeline complet à partir de plusieurs sources : CSV, MongoDB, scraping web et API publique.
 
-#Objectifs
+Fusionner et normaliser les données issues de différentes origines pour les consolider dans une base SQLite.
 
-- Construire un pipeline complet à partir de 5 sources.  
-- Nettoyer, enrichir et centraliser les données dans SQLite.  
-- Créer une API REST FastAPI avec authentification sécurisée JWT.  
-- Permettre la consultation simple des accords vins-plats.
+Créer une API REST avec FastAPI et sécuriser l’accès via JWT.
 
-#Architecture du projet
+Permettre la recherche et la consultation d’accords entre les plats et les vins.
 
+Architecture du projet
 LUMINOTECH/
+│
+├── api/
+│   ├── api.py                     # Routes FastAPI
+│   ├── auth.py                    # Authentification JWT
+│   └── import_wines_from_api.py   # Import des vins depuis API publique
+│
+├── csv/
+│   ├── ETL.py                     # Nettoyage et transformation des plats
+│   ├── plats_a_la_carte.csv       # Fichier brut des plats
+│   └── plats_a_la_carte_transforme.csv
+│
+├── scrap_big_data/
+│   ├── criteres.csv               # Critères d’association (viande, poisson, etc.)
+│   └── mongoweb.py                # Extraction et structuration des données en ligne
+│
+├── sql/
+│   ├── vins_fusionnes.csv         # Fusion Mongo + scraping
+│   ├── plats_clean.csv            # Données plats nettoyées
+│   ├── accords.db                 # Base SQLite finale
+│   └── script.py                  # Script d’intégration complète
+│
+├── docker-compose.yml
+├── requirements.txt
+└── README.md
 
-.venv/                        
- api/
-     __init__.py
-    api.py                    
-    auth.py                   
-    import_wines_from_api.py  
-
- csv/
-    ETL.py                    
-    plats_a_la_carte.csv
-    plats_a_la_carte_transforme.csv
-
- scrap_big_data/
-    criteres.csv
-    mongoweb.py               
-
- sql/
-    accords.db               
-    plats_clean.csv
-    plats_clean.json
-    script.py  
-
- docker-compose.yml             
- requirements.txt               
-.gitignore
-
-# Préparation des données:
-
-    1. Extraction et transformation des plats (CSV)
-
+Étapes du pipeline
+Extraction et transformation des plats (CSV)
 python csv/ETL.py
 
-Nettoie et enrichit les plats pour générer plats_a_la_carte_transforme.csv.
 
-    2.Scraping des vins depuis Vins de Francep
+Nettoie les données brutes, supprime les accents, uniformise les libellés, ajoute des métadonnées et produit un fichier propre :
+plats_a_la_carte_transforme.csv
 
+Récupération des vins depuis une source en ligne
 python scrap_big_data/mongoweb.py
 
-Scrape le site vinsdefrance-roanne.fr, insère les données dans MongoDB (via Docker) et ajoute les critères d’accords.
 
-    3.Création et remplissage de la base SQLite
+Les données relatives aux vins ont été récupérées à partir d’une source publique en ligne et stockées dans une base MongoDB (Docker).
+Ces informations ont ensuite été exportées en CSV pour être fusionnées et nettoyées.
 
+Fusion et normalisation des données
+
+Les données MongoDB étant limitées, un ETL de fusion a permis de combiner les données MongoDB et les données issues du web pour produire un fichier unique :
+vins_fusionnes.csv
+
+Cette étape supprime les doublons et harmonise les colonnes (nom, description, source, criteres).
+
+Création et remplissage de la base SQLite
 python sql/script.py
 
-Crée les tables (vins, plats, accords_met_vin) et génère les liens d’accords entre plats et vins.
 
-    4.Import des vins via API publique
+Ce script :
 
+Crée les tables plats, vins et accords_met_vin
+
+Importe les plats et vins depuis les CSV nettoyés
+
+Génère automatiquement les accords mets & vins selon les critères communs
+
+Produit la base accords.db
+
+Enrichissement via API publique
 python api/import_wines_from_api.py
 
-Récupère les vins depuis https://api.sampleapis.com/wines et les insère dans accords.db.
 
-# Lancer l’API FastAPI
+Importe les données depuis https://api.sampleapis.com/wines
+,
+augmentant le nombre de références disponibles dans la base SQLite.
 
+Lancer l’API FastAPI
 uvicorn api.api:app --reload
 
-ouverture dans le navigateur :
+
+Ouvre ensuite dans ton navigateur :
 http://127.0.0.1:8000/docs
 
-# Authentification JWT
+Authentification JWT
 
-L’API est sécurisée par JSON Web Tokens (JWT).
+L’accès aux routes est sécurisé par un système de JSON Web Tokens (JWT).
+Il faut d’abord obtenir un token via /token, puis l’utiliser dans les en-têtes de requêtes.
 
-# Endpoints principaux
+Endpoints principaux
+Méthode	Endpoint	Description
+POST	/token	Authentifie l’utilisateur et renvoie un JWT
+GET	/vins	Liste tous les vins
+GET	/vins/{nom}	Recherche un vin spécifique
+GET	/plats	Liste tous les plats
+GET	/plats/{nom}	Recherche un plat spécifique
+GET	/accords/par_plat/{plat}	Trouve les vins associés à un plat
+GET	/accords/par_vin/{vin}	Trouve les plats associés à un vin
 
-| Méthode  | Endpoint                      | Description                        |
-| -------- | ----------------------------- | ---------------------------------- |
-| **POST** | `/token`                      | Authentifie et renvoie un JWT      |
-| **GET**  | `/vins`                       | Liste tous les vins                |
-| **GET**  | `/vins/{nom}`                 | Recherche d’un vin                 |
-| **GET**  | `/plats`                      | Liste tous les plats               |
-| **GET**  | `/plats/{nom}`                | Recherche d’un plat                |
-| **GET**  | `/accord_v_p/par_plat/{plat}` | Trouve les vins associés à un plat |
-| **GET**  | `/accord_v_p/par_vin/{vin}`   | Trouve les plats associés à un vin |
-
-# Technologies utilisées
+Technologies utilisées
 Catégorie	Outils
-Langage	Python3
+Langage	Python 3
 Framework API	FastAPI
-Base de données	SQLite + MongoDB
-Scraping	BeautifulSoup
-ETL / Data Cleaning	Pandas
-Sécurité / Authentification	JWT
-Serveur	Uvicorn
-Virtualisation	Docker
+Bases de données	SQLite + MongoDB
+Traitement & nettoyage	Pandas
+Collecte de données	BeautifulSoup (source publique en ligne)
+Authentification	JWT (JSON Web Tokens)
+Serveur local	Uvicorn
+Environnement	Docker (MongoDB)
 
-# Auteur
+
+
+Respect du RGPD
+
+Le projet ne manipule actuellement aucune donnée personnelle.
+Cependant, dans une version future (application mobile ou web), certaines informations utilisateur pourraient être collectées (nom, prénom, e-mail).
+Dans ce cas, le projet sera conforme au Règlement Général sur la Protection des Données (RGPD) : consentement, droit d’accès, suppression et sécurisation des données.
+
+Auteur
 
 Lucas HENNEUSE
-
+Promotion Développeur IA – Simplon 2025
+GitHub : lucasHENNEUSE
