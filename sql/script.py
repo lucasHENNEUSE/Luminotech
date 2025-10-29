@@ -1,22 +1,17 @@
 import csv
 import sqlite3
 from datetime import datetime
-from pymongo import MongoClient
 import random
 
-# Connexion MongoDB
-client = MongoClient("mongodb://localhost:27018/")
-db = client["projet_e1"]
-collection = db["vins_vinsdefrance"]
-
-# Chemin vers ton CSV
-csv_file = "./sql/plats_clean.csv"
+# Fichiers CSV
+csv_file_plats = "./sql/plats_clean.csv"
+csv_file_vins = "./sql/vins_fusionnes.csv"
 
 # Connexion SQLite
 conn = sqlite3.connect("accords.db")
 cursor = conn.cursor()
 
-# Création des tables
+# === Création des tables ===
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS plats (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,37 +46,60 @@ CREATE TABLE IF NOT EXISTS accords_met_vin (
 """)
 conn.commit()
 
-# Remplir la table vins depuis MongoDB
-vins = list(collection.find())
-for vin in vins:
-    cursor.execute("""
-        INSERT INTO vins (nom_vin, description, source, criteres)
-        VALUES (?, ?, ?, ?)
-    """, (
-        vin.get("nom"),
-        vin.get("description", ""),
-        vin.get("source", ""),
-        vin.get("criteres".strip(), vin.get("accompagnement".strip(), "vegetarien"))  # prend criteres si existe sinon accompagnement
-    ))
+# === Importer les vins depuis le CSV vins_fusionnes.csv ===
+vins = []
+cursor.execute("DELETE FROM vins")  # nettoyage avant import
+conn.commit()
+
+with open(csv_file_vins, newline="", encoding="utf-8-sig") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        nom_vin = str(row.get("nom") or row.get("nom_vin") or "").strip()
+        description = str(row.get("description", "")).strip()
+        source = str(row.get("source", "")).strip()
+        criteres = str(row.get("criteres", "")).strip().lower()
+
+        if nom_vin:  # insère seulement si un nom existe
+            cursor.execute("""
+                INSERT INTO vins (nom_vin, description, source, criteres)
+                VALUES (?, ?, ?, ?)
+            """, (nom_vin, description, source, criteres))
+
+            vins.append({
+                "id": cursor.lastrowid,
+                "criteres": criteres
+            })
+        else:
+            print(f"[Ligne ignorée] Pas de nom_vin détecté : {row}")
 
 conn.commit()
 
-# Remplir la table plats depuis CSV
+# === Importer les plats depuis le CSV plats_clean.csv ===
 plats = []
-with open(csv_file, newline="", encoding="utf-8") as f:
+cursor.execute("DELETE FROM plats")  # nettoyage avant import
+conn.commit()
+
+with open(csv_file_plats, newline="", encoding="utf-8-sig") as f:
     reader = csv.DictReader(f)
     for row in reader:
+        nom_plat = str(row.get("nom_plat", "")).strip()
+        type_plat = str(row.get("type_plat", "")).strip()
+        criteres = str(row.get("criteres", "")).lower().strip()
+
         cursor.execute("""
             INSERT INTO plats (nom_plat, type_plat, criteres, created_at, status)
             VALUES (?, ?, ?, ?, ?)
-        """, (row["nom_plat"], row["type_plat"], row["criteres"].lower(), datetime.now().isoformat(), "actif"))
-        plats.append({"id": cursor.lastrowid, "criteres": row["criteres"].lower()})
+        """, (nom_plat, type_plat, criteres, datetime.now().isoformat(), "actif"))
+
+        plats.append({"id": cursor.lastrowid, "criteres": criteres})
 
 conn.commit()
 
-# Créer les accords : max 3 vins par plat
+# === Création automatique des accords mets & vins ===
+cursor.execute("DELETE FROM accords_met_vin")
+conn.commit()
+
 for plat in plats:
-    # récupérer les vins correspondant au critere du plat
     vins_matches = list(cursor.execute("SELECT id FROM vins WHERE criteres=?", (plat["criteres"],)))
     if vins_matches:
         vins_selectionnes = random.sample(vins_matches, min(3, len(vins_matches)))
@@ -92,5 +110,20 @@ for plat in plats:
             """, (plat["id"], vin[0], datetime.now().isoformat(), "actif"))
 
 conn.commit()
+
+# === Résumé final ===
+count_vins = cursor.execute("SELECT COUNT(*) FROM vins").fetchone()[0]
+count_plats = cursor.execute("SELECT COUNT(*) FROM plats").fetchone()[0]
+count_accords = cursor.execute("SELECT COUNT(*) FROM accords_met_vin").fetchone()[0]
+
+print(f"\nImport terminé avec succès !")
+print(f"→ {count_vins} vins insérés dans la table 'vins'")
+print(f"→ {count_plats} plats insérés dans la table 'plats'")
+print(f"→ {count_accords} accords générés automatiquement\n")
+
+# Aperçu des 5 premiers vins
+print("Exemple de vins insérés :")
+for vin in cursor.execute("SELECT nom_vin, criteres FROM vins LIMIT 5"):
+    print(f" - {vin[0]} ({vin[1]})")
+
 conn.close()
-print("Tables plats, vins et accords_met_vin créées et remplies avec succès !")

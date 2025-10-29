@@ -1,16 +1,16 @@
-﻿plat;viande;dessert;poisson;accompagnements;unnamed: 5;critere;sucre;vegetarien;viande blanche;viande rouge;created_at;status
-poulet roti;oui;;non;petit legumes;;viande blanche;non;non;oui;non;2025-10-23T14:16:29.903119;actif
-saumon grille;;;oui;petit legumes;;poisson;non;non;non;non;2025-10-23T14:16:29.903119;actif
-steak de beouf;oui;;non;petit legumes;;viande rouge;non;non;non;oui;2025-10-23T14:16:29.903119;actif
-quiche lorraine;oui;;non;salade;;viande blanche;non;non;oui;non;2025-10-23T14:16:29.903119;actif
-risotto aux champignons;;;non;salade;;vegetarien;non;oui;non;non;2025-10-23T14:16:29.903119;actif
-tarte pommes;;oui;non;;;sucre;oui;non;non;non;2025-10-23T14:16:29.903119;actif
-beauf bourgignon;oui;;non;petit legumes;;viande rouge;non;non;non;oui;2025-10-23T14:16:29.903119;actif
-salade nicoise;;;non;;;vegetarien;non;oui;non;non;2025-10-23T14:16:29.903119;actif
-accras de morue;;;oui;salade;;poisson;non;non;non;non;2025-10-23T14:16:29.903119;actif
-ratatouille;;;non;;;vegetarien;non;oui;non;non;2025-10-23T14:16:29.903119;actif
-omelette aux fines herbes;;;non;petit legumes;;vegetarien;non;oui;non;non;2025-10-23T14:16:29.903119;actif
-filet de dorade;;;oui;petit legumes;;poisson;non;non;non;non;2025-10-23T14:16:29.903119;actif
-lasagnes;oui;;non;salade;;viande blanche;non;non;oui;non;2025-10-23T14:16:29.903119;actif
-fromage de chevre frais;;;non;salade;;vegetarien;non;oui;non;non;2025-10-23T14:16:29.903119;actif
-terrine de lapin;oui;;non;salade;;viande blanche;non;non;oui;non;2025-10-23T14:16:29.903119;actif
+﻿plat;viande;dessert;poisson;accompagnements;critere;vegetarien;viande blanche;viande rouge;created_at;status
+poulet roti;non;;non;petit lgumes;viande blanche;non;oui;non;2025-10-29T12:50:28.014396;actif
+saumon grille;non;;oui;petit lgumes;poisson;non;non;non;2025-10-29T12:50:28.014396;actif
+steak de buf;oui;;non;petit lgumes;viande;non;non;non;2025-10-29T12:50:28.014396;actif
+quiche lorraine;non;;non;salade;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+risotto aux champignons;non;;non;salade;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+tarte pommes;non;oui;non;;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+buf bourgignon;oui;;non;petit lgumes;viande;non;non;non;2025-10-29T12:50:28.014396;actif
+salade nicoise;non;;non;;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+accras de morue;non;;oui;salade;poisson;non;non;non;2025-10-29T12:50:28.014396;actif
+ratatouille;non;;non;;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+omelette aux fines herbes;non;;non;petit lgumes;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+filet de dorade;non;;oui;petit lgumes;poisson;non;non;non;2025-10-29T12:50:28.014396;actif
+lasagnes;non;;non;salade;viande rouge;non;non;oui;2025-10-29T12:50:28.014396;actif
+fromage de chevre frais;non;;non;salade;vegetarien;oui;non;non;2025-10-29T12:50:28.014396;actif
+terrine de lapin;non;;non;salade;viande blanche;non;oui;non;2025-10-29T12:50:28.014396;actif
