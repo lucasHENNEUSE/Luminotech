@@ -11,7 +11,7 @@ csv_file_vins = "./sql/vins_fusionnes.csv"
 conn = sqlite3.connect("accords.db")
 cursor = conn.cursor()
 
-# === Création des tables ===
+# création des tables
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS plats (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS accords_met_vin (
 """)
 conn.commit()
 
-# === Importer les vins depuis le CSV vins_fusionnes.csv ===
+# Importer les vins depuis le fichier (vins_fusionnes.csv)
 vins = []
 cursor.execute("DELETE FROM vins")  # nettoyage avant import
 conn.commit()
@@ -59,7 +59,7 @@ with open(csv_file_vins, newline="", encoding="utf-8-sig") as f:
         source = str(row.get("source", "")).strip()
         criteres = str(row.get("criteres", "")).strip().lower()
 
-        if nom_vin:  # insère seulement si un nom existe
+        if nom_vin:  
             cursor.execute("""
                 INSERT INTO vins (nom_vin, description, source, criteres)
                 VALUES (?, ?, ?, ?)
@@ -74,7 +74,7 @@ with open(csv_file_vins, newline="", encoding="utf-8-sig") as f:
 
 conn.commit()
 
-# === Importer les plats depuis le CSV plats_clean.csv ===
+# Importer les plats depuis le fichier (plats_clean.csv)
 plats = []
 cursor.execute("DELETE FROM plats")  # nettoyage avant import
 conn.commit()
@@ -95,7 +95,7 @@ with open(csv_file_plats, newline="", encoding="utf-8-sig") as f:
 
 conn.commit()
 
-# === Création automatique des accords mets & vins ===
+#Création automatique des accords mets/vins
 cursor.execute("DELETE FROM accords_met_vin")
 conn.commit()
 
@@ -111,7 +111,7 @@ for plat in plats:
 
 conn.commit()
 
-# === Résumé final ===
+# Résumé final
 count_vins = cursor.execute("SELECT COUNT(*) FROM vins").fetchone()[0]
 count_plats = cursor.execute("SELECT COUNT(*) FROM plats").fetchone()[0]
 count_accords = cursor.execute("SELECT COUNT(*) FROM accords_met_vin").fetchone()[0]
@@ -125,5 +125,27 @@ print(f"→ {count_accords} accords générés automatiquement\n")
 print("Exemple de vins insérés :")
 for vin in cursor.execute("SELECT nom_vin, criteres FROM vins LIMIT 5"):
     print(f" - {vin[0]} ({vin[1]})")
+
+
+# Requête SQL pour afficher les accords plats/vins
+print("\n=== Liste des accords plats/vins générés ===\n")
+
+query = """
+SELECT 
+    plats.nom_plat AS Plat,
+    vins.nom_vin AS Vin,
+    vins.criteres AS Critere_commun
+FROM accords_met_vin amv
+JOIN plats  ON amv.plat_id = plats.id
+JOIN vins   ON amv.vin_id = vins.id
+WHERE plats.criteres = vins.criteres
+ORDER BY plats.nom_plat;
+"""
+
+cursor.execute(query)
+rows = cursor.fetchall()
+
+for row in rows:
+    print(f"Plat : {row[0]} | Vin : {row[1]} | Critère : {row[2]}")
 
 conn.close()

@@ -21,7 +21,7 @@ db = client[DB_NAME]
 collection = db[COLLECTION_NAME]
 
 # Récupération des données Mongo dans un DataFrame
-data_mongo = list(collection.find({}, {"_id": 0}))  # on exclut le champ _id
+data_mongo = list(collection.find({}, {"_id": 0}))  # champ _id
 df_mongo = pd.DataFrame(data_mongo)
 print(f"→ {len(df_mongo)} documents récupérés depuis MongoDB")
 
@@ -62,4 +62,4 @@ print(f"→ Après nettoyage : {len(df_fusion)} vins uniques trouvés.")
 ################ enregistrement ##############
 df_fusion.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
 print(f"\nFichier final créé : {OUTPUT_CSV}")
-print(f"   Total : {len(df_fusion)} lignes sauvegardées sans doublons.")
+print(f" Total : {len(df_fusion)} lignes sauvegardées sans doublons.")
