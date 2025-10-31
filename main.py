@@ -3,11 +3,11 @@ main.py — Point d’entrée principal du projet Luminotech
 -------------------------------------------------------
 Ce script orchestre toutes les étapes du pipeline :
 
-1Extraction & transformation des données CSV
-2Scraping + insertion MongoDB
-3Import des vins depuis l’API publique
-4Construction de la base SQLite finale
-5Lancement du serveur FastAPI
+1. Extraction & transformation des données CSV
+2. Scraping + insertion MongoDB
+3. Création de la base SQLite
+4. Import des vins depuis l’API publique (ajout final)
+5. Lancement du serveur FastAPI
 """
 
 import os
@@ -34,12 +34,12 @@ STEPS = [
         "command": ["python", "scrap_big_data/mongoweb.py"],
     },
     {
-        "name": "Import des vins depuis l’API publique",
-        "command": ["python", "api/import_wines_from_api.py"],
-    },
-    {
         "name": "Création et remplissage de la base SQLite",
         "command": ["python", "sql/script.py"],
+    },
+    {
+        "name": "Import final des vins depuis l’API publique",
+        "command": ["python", "api/import_wines_from_api.py"],
     },
 ]
 

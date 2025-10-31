@@ -9,7 +9,7 @@ BASE_URL = "https://api.sampleapis.com/wines"
 conn = sqlite3.connect("./accords.db")
 cursor = conn.cursor()
 
-# Création de la table si elle n’existe pas
+# Création de la table 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS vins (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS vins (
 )
 """)
 
-# Liste des catégories de vins à importer
+# Liste des catégories de vins à récupérer
 categories = ["reds", "whites", "sparkling"]
 
 for cat in categories:
