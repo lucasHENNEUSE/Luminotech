@@ -1,14 +1,14 @@
 Luminotech — Accords Mets & Vins
 Présentation du projet
 
-Luminotech est un projet de data engineering et de développement d’API autour des accords mets & vins.
+Luminotech est un projet de développement d’API autour des accords mets & vins.
 Il vise à créer une chaîne complète de traitement de données (ETL) et une API REST sécurisée permettant de consulter et enrichir des données issues de plusieurs sources hétérogènes.
 
 Ce projet illustre la mise en œuvre d’un pipeline complet, depuis la collecte multi-source jusqu’à la mise à disposition via une API FastAPI.
 
 Objectifs
 
-Construire un pipeline complet à partir de plusieurs sources : CSV, MongoDB, scraping web et API publique.
+Construire un pipeline complet à partir de plusieurs sources : CSV, MongoDB, SQL, scraping web et API publique.
 
 Fusionner et normaliser les données issues de différentes origines pour les consolider dans une base SQLite.
 
@@ -34,7 +34,7 @@ LUMINOTECH/
 │   └── mongoweb.py                # Extraction et structuration des données en ligne
 │
 ├── sql/
-│   ├── vins_fusionnes.csv         # Fusion Mongo + scraping
+│   ├── vins_fusionnes.csv         # Fusion Mongo + scraping ( agrégation )
 │   ├── plats_clean.csv            # Données plats nettoyées
 │   ├── accords.db                 # Base SQLite finale
 │   └── script.py                  # Script d’intégration complète
@@ -55,8 +55,7 @@ Récupération des vins depuis une source en ligne
 python scrap_big_data/mongoweb.py
 
 
-Les données relatives aux vins ont été récupérées à partir d’une source publique en ligne et stockées dans une base MongoDB (Docker).
-Ces informations ont ensuite été exportées en CSV pour être fusionnées et nettoyées.
+Les données relatives aux vins ont été récupérées à partir d’une source publique en ligne et  d'une base MongoDB (Docker).
 
 Fusion et normalisation des données
 
@@ -67,7 +66,6 @@ Cette étape supprime les doublons et harmonise les colonnes (nom, description, 
 
 Création et remplissage de la base SQLite
 python sql/script.py
-
 
 Ce script :
 
@@ -84,17 +82,17 @@ python api/import_wines_from_api.py
 
 
 Importe les données depuis https://api.sampleapis.com/wines
-,
+
 augmentant le nombre de références disponibles dans la base SQLite.
 
 Lancer l’API FastAPI
 uvicorn api.api:app --reload
 
 
-Ouvre ensuite dans ton navigateur :
+Ouvrir ensuite dans le navigateur :
 http://127.0.0.1:8000/docs
 
-Authentification JWT
+Authentification et sécurité
 
 L’accès aux routes est sécurisé par un système de JSON Web Tokens (JWT).
 Il faut d’abord obtenir un token via /token, puis l’utiliser dans les en-têtes de requêtes.
