@@ -14,7 +14,7 @@ from api.auth import (
 # Utilisateur de test
 fake_user = {
     "username": "lucas",
-    "password": get_password_hash("oceluc")  # mot de passe = oceluc
+    "password": get_password_hash("")
 }
 
 # Création de l'app FastAPI
