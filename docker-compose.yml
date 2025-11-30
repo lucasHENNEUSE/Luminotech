@@ -5,10 +5,10 @@ services:
     image: mysql:8.0
     container_name: mysql_vins
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: vins
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: 
+      MYSQL_USER: 
+      MYSQL_PASSWORD: 
     ports:
       - "3307:3306"
     volumes:
