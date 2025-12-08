@@ -25,7 +25,7 @@ def nettoyer_texte(texte: str) -> str:
 
 ####################### Extraction #########################
 def extract_from_csv(file_path: str) -> pd.DataFrame:
-    """Extrait les données d’un fichier CSV avec gestion de l’encodage."""
+    """Extrait les données d'un fichier CSV avec gestion de l'encodage."""
     try:
         data = pd.read_csv(file_path, encoding="utf-8", sep=";")
         logging.info("Données extraites depuis le fichier CSV (UTF-8).")
@@ -36,7 +36,7 @@ def extract_from_csv(file_path: str) -> pd.DataFrame:
         logging.info("Données extraites depuis le fichier CSV (ISO-8859-1).")
         return data
     except Exception as e:
-        logging.error("Erreur lors de l’extraction du fichier CSV : %s", e)
+        logging.error("Erreur lors de l'extraction du fichier CSV : %s", e)
         raise
 
 ###################### Transformation #########################

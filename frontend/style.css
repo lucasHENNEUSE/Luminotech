@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto:wght@300;400&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('img/vignes.jpeg') center/cover fixed no-repeat;
+    color: #3a1f2b;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: rgba(255,255,255,0.7);
+    backdrop-filter: blur(4px);
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #5a0c2c;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.card {
+    background: rgba(255,255,255,0.85);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #5a0c2c;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.suggestion, .description {
+    min-height: 150px;
+}

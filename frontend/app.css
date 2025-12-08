@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto:wght@300;400&display=swap'); 
+
+body { margin: 0;
+     padding: 0; 
+     text-align: center; 
+     font-family: 'Roboto', 
+     sans-serif; background: url('img/vignes.jpg') center/cover fixed no-repeat; 
+     color: rgba(90,12,44,0.9);
+    } /* Image du haut */
+
+ .top-image { 
+    width: 180px; margin-top: 20px; 
+} /* Header */ 
+
+ h1 { font-family: 'Playfair Display', serif; 
+    font-size: 3.2rem; 
+    margin-bottom: 0; }
+ 
+ p { 
+    font-size: 1.2rem; 
+    margin-top: 5px; 
+} /* Animation vignes */ 
+ 
+ .vigne-container { 
+    position: relative; 
+    width: 100%; 
+    height: 250px; 
+    margin-top: 50px; 
+
+} .vigne { 
+    position: absolute; 
+    width: 6px; 
+    background-color: rgba(90,12,44,0.9); 
+    height: 0; 
+    border-radius: 6px;
+    animation: grow 4s ease forwards; 
+}
+
+.vigne.gauche {
+    left: 20%; 
+} 
+
+.vigne.droite { 
+    right: 20%; 
+    animation-delay: 1s; 
+} 
+
+@keyframes grow { 
+    from { height: 0; } to { height: 200px; } 
+} /* Bouton */ 
+
+.enter-button { 
+    margin-top: 40px;
+    padding: 18px 40px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background-color: #5a0c2c; 
+    color: white; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    animation: fadeInUp 1.5s ease-out forwards; 
+}
+
+.enter-button:hover { 
+    background-color: #7c1840; 
+    transform: scale(1.05); 
+}
+
+body { background-image: url('./vignes.avif');
+    background-size: cover;
+    /* adapte l’image à la taille de l’écran */ background-position: center; 
+    /* centre l’image */ background-repeat: no-repeat; 
+    /* évite la répétition */ background-attachment: fixed; 
+    /* effet fixe pendant le scroll */ 
+}
+
+.fade-button { 
+    opacity: 0; /* invisible au départ */ transform: translateY(20px); 
+    /* légèrement vers le bas */ animation: fadeInUp 1.8s ease-out forwards; 
+    padding: 15px 30px; font-size: 1.3rem; 
+    border-radius: 10px; background-color: #5a0c2c; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    font-family: 'Playfair Display', serif; 
+    letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+}
+
+.fade-button:hover { 
+    transform: scale(1.05); 
+}
+
+/* Animation */ @keyframes fadeInUp { 
+    0% { opacity: 0; transform: translateY(20px); 
+    } 100% { opacity: 1; transform: translateY(0); 
+    } 
+}

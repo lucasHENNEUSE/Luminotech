@@ -1,12 +1,12 @@
 """
-main.py — Point d’entrée principal du projet Luminotech
+main.py — Point d'entrée principal du projet Luminotech
 -------------------------------------------------------
 Ce script orchestre toutes les étapes du pipeline :
 
 1. Extraction & transformation des données CSV
 2. Scraping + insertion MongoDB
 3. Création de la base SQLite
-4. Import des vins depuis l’API publique (ajout final)
+4. Import des vins depuis l'API publique (ajout final)
 5. Lancement du serveur FastAPI
 """
 
@@ -38,7 +38,7 @@ STEPS = [
         "command": ["python", "sql/script.py"],
     },
     {
-        "name": "Import final des vins depuis l’API publique",
+        "name": "Import final des vins depuis l'API publique",
         "command": ["python", "api/import_wines_from_api.py"],
     },
 ]
@@ -46,12 +46,12 @@ STEPS = [
 
 def run_step(step):
     """Exécute une étape du pipeline avec affichage clair."""
-    logging.info(f"Démarrage de l’étape : {step['name']}")
+    logging.info(f"Démarrage de l'étape : {step['name']}")
     try:
         subprocess.run(step["command"], check=True)
         logging.info(f"Étape terminée : {step['name']}")
     except subprocess.CalledProcessError as e:
-        logging.error(f"Erreur pendant l’étape : {step['name']}")
+        logging.error(f"Erreur pendant l'étape : {step['name']}")
         logging.error(str(e))
         exit(1)
     sleep(1)
@@ -74,18 +74,18 @@ def run_pipeline():
 
 def launch_api():
     """Lance le serveur FastAPI avec uvicorn."""
-    logging.info("Démarrage de l’API FastAPI...")
+    logging.info("Démarrage de l'API FastAPI...")
     try:
         subprocess.run(["uvicorn", "api.api:app", "--reload"])
     except KeyboardInterrupt:
-        logging.warning("Arrêt manuel de l’API FastAPI.")
+        logging.warning("Arrêt manuel de l'API FastAPI.")
     except Exception as e:
-        logging.error(f"Erreur lors du lancement de l’API : {e}")
+        logging.error(f"Erreur lors du lancement de l'API : {e}")
 
 
 if __name__ == "__main__":
     logging.info("Début du processus complet Luminotech")
-    logging.info("Vérification de l’environnement...")
+    logging.info("Vérification de l'environnement...")
 
     # Vérifie que les chemins essentiels existent
     required_dirs = ["csv", "scrap_big_data", "api", "sql"]
