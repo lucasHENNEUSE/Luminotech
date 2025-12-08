@@ -49,10 +49,32 @@ select {
     min-height: 150px;
 }
 
-body { background-image: url('./vignes2.avif');
+body { background-image: url('./vignes4.png');
     background-size: cover;
     /* adapte l’image à la taille de l’écran */ background-position: center; 
     /* centre l’image */ background-repeat: no-repeat; 
     /* évite la répétition */ background-attachment: fixed; 
     /* effet fixe pendant le scroll */ 
 }
+
+/* Conteneur centré */
+.reset-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Conteneur centré */
+.reset-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Conteneur centré */
+.reset-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
