@@ -38,11 +38,13 @@ body { margin: 0;
 
 .vigne.gauche {
     left: 20%; 
+   
 } 
 
 .vigne.droite { 
     right: 20%; 
     animation-delay: 1s; 
+
 } 
 
 @keyframes grow { 

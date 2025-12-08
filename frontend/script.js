@@ -51,7 +51,7 @@ async function loadData() {
 }
 
 function fillSelect(select, list, key) {
-    select.innerHTML = '<option value="">— Choisir —</option>';
+    select.innerHTML = '<option value=""> Sélectionnez </option>';
 
     list.forEach(item => {
         const opt = document.createElement("option");

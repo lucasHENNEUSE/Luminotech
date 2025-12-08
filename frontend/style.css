@@ -3,21 +3,19 @@
 body {
     font-family: 'Roboto', sans-serif;
     background: url('img/vignes.jpeg') center/cover fixed no-repeat;
-    color: #3a1f2b;
+    color: rgba(90,12,44,0.9);
     margin: 0;
 }
 
 header {
     text-align: center;
-    padding: 40px 20px;
-    background-color: rgba(255,255,255,0.7);
-    backdrop-filter: blur(4px);
+    padding: 40px 40px;
 }
 
 header h1 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
-    color: #5a0c2c;
+    color: rgba(90,12,44,0.9);
 }
 
 .container {
@@ -29,20 +27,32 @@ header h1 {
 }
 
 .card {
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.521);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 3px rgb(90, 12, 44);
+    transition: transform 0.3s, box-shadow 0.3s;
+    
 }
 
 select {
     width: 100%;
     padding: 12px;
-    border: 2px solid #5a0c2c;
+    border: 2px solid rgba(90,12,44,0.9);
     border-radius: 8px;
     font-size: 1rem;
+    margin-bottom: 20px;
+   
 }
 
 .suggestion, .description {
     min-height: 150px;
+}
+
+body { background-image: url('./vignes2.avif');
+    background-size: cover;
+    /* adapte l’image à la taille de l’écran */ background-position: center; 
+    /* centre l’image */ background-repeat: no-repeat; 
+    /* évite la répétition */ background-attachment: fixed; 
+    /* effet fixe pendant le scroll */ 
 }
