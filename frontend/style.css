@@ -1,11 +1,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto:wght@300;400&display=swap');
 
+/* ——————————————
+    Fond d’écran d’origine
+   —————————————— */
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('img/vignes.jpeg') center/cover fixed no-repeat;
+    background: url('vignes4.png') center/cover fixed no-repeat;
     color: rgba(90,12,44,0.9);
     margin: 0;
+    overflow-x: hidden;
 }
+
+/* ——————————————
+    Animation globale
+   —————————————— */
+.page-wrapper {
+    opacity: 0;
+    animation: pageFadeIn 1s ease-out forwards;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ——————————————
+    Animation éléments en cascade
+   —————————————— */
+.fade-in-delay {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.fade-in-delay:nth-child(1) { animation-delay: 0.3s; }
+.fade-in-delay:nth-child(2) { animation-delay: 0.6s; }
+.fade-in-delay:nth-child(3) { animation-delay: 0.9s; }
+.fade-in-delay:nth-child(4) { animation-delay: 1.2s; }
+.fade-in-delay:nth-child(5) { animation-delay: 1.5s; }
+.fade-in-delay:nth-child(6) { animation-delay: 1.8s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ——————————————
+    Styles généraux
+   —————————————— */
 
 header {
     text-align: center;
@@ -18,6 +60,7 @@ header h1 {
     color: rgba(90,12,44,0.9);
 }
 
+/* Grille principale */
 .container {
     max-width: 1000px;
     margin: 40px auto;
@@ -26,15 +69,16 @@ header h1 {
     gap: 30px;
 }
 
+/* Cartes */
 .card {
     background: rgba(255, 255, 255, 0.521);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 8px 3px rgb(90, 12, 44);
     transition: transform 0.3s, box-shadow 0.3s;
-    
 }
 
+/* Select */
 select {
     width: 100%;
     padding: 12px;
@@ -42,39 +86,35 @@ select {
     border-radius: 8px;
     font-size: 1rem;
     margin-bottom: 20px;
-   
 }
 
+/* Zones texte */
 .suggestion, .description {
     min-height: 150px;
 }
 
-body { background-image: url('./vignes4.png');
-    background-size: cover;
-    /* adapte l’image à la taille de l’écran */ background-position: center; 
-    /* centre l’image */ background-repeat: no-repeat; 
-    /* évite la répétition */ background-attachment: fixed; 
-    /* effet fixe pendant le scroll */ 
+/* Bouton en haut à droite */
+.top-right-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index:25;
 }
 
-/* Conteneur centré */
-.reset-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+.enter-button {
+    padding: 8px 20px;
+    font-size: 1rem;
+    background-color: #5a0c2c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index:999;
 }
 
-/* Conteneur centré */
-.reset-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+.enter-button:hover {
+    transform: scale(1.05);
+    background-color: #7c1840;
 }
-
-/* Conteneur centré */
-.reset-center {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-

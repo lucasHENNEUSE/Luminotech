@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faire une suggestion</title>
+    <link rel="stylesheet" href="suggestion.css">
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <header>
+        <h1>Faire une suggestion</h1>
+        <p>Proposez un plat, un vin ou une idée d’accord</p>
+    </header>
+
+    <main class="container fade-in-delay">
+
+        <div class="card">
+            <h2>Suggestion de plat</h2>
+            <input type="text" id="suggestPlat" placeholder="Ex : Saumon grillé">
+        </div>
+
+        <div class="card">
+            <h2>Suggestion de vin</h2>
+            
+            <input type="text" id="suggestVin" placeholder="Ex : Pouilly-Fumé">
+        </div>
+
+        <div class="card full">
+            <h2>Critères / Détails</h2>
+            <textarea id="suggestDetail" placeholder="Ajoutez plus de détails (optionnel)..."></textarea>
+        </div>
+
+        <button id="validateBtn" class="validate-button fade-in-delay">Valider ma suggestion</button>
+        <button class="back-button fade-in-delay" onclick="window.location.href='app.html'">Retour</button>
+
+    </main>
+
+</div>
+
+<!-- Fenêtre de confirmation -->
+<div id="confirmBox" class="confirm-overlay">
+    <div class="confirm-window">
+        <h3>Confirmer votre suggestion</h3>
+
+        <p><strong>Plat :</strong> <span id="recapPlat"></span></p>
+        <p><strong>Vin :</strong> <span id="recapVin"></span></p>
+        <p><strong>Détails :</strong> <span id="recapDetail"></span></p>
+
+        <div class="confirm-buttons">
+            <button id="confirmSend">Confirmer</button>
+            <button id="cancelConfirm">Annuler</button>
+        </div>
+    </div>
+</div>
+
+<script src="suggestion.js"></script>
+
+</body>
+</html>
