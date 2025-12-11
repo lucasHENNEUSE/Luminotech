@@ -1,0 +1,97 @@
+
+
+body { margin: 0;
+     padding: 0; 
+     text-align: center; 
+     font-family: 'Roboto', 
+     sans-serif; background: url('vignes7.png') center/cover fixed no-repeat; 
+     color: rgba(90,12,44,0.9);
+    } /* Image du haut */
+img{
+    max-width: 100%;
+    height: auto;
+    animation: grow 4s ease forwards;
+}
+/* Bouton Retour */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background: rgba(90,12,44,0.9);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 30;
+}
+.back-button:hover {
+    background: rgba(90,12,44,0.9);
+}
+
+header h1 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2.4rem;
+    color: rgba(90,12,44,0.9);
+}
+header p {
+    text-align: center;
+    color: rgba(90,12,44,0.9);
+}
+
+/* Carte + points */
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    
+}
+
+.carte-france {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Points */
+.point {
+    width: 18px;
+    height: 18px;
+    background: #a04520;
+    border: 2px solid #4b1e1e;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    animation: grow 4s ease forwards;
+}
+
+.point:hover {
+    transform: scale(1.4);
+    background: #d67b4d;
+}
+
+/* Info box */
+.info-box {
+    margin-top: 15px;
+    background: rgba(255, 245, 235, 0.9);
+    padding: 15px;
+    width: 300px;
+    border: 2px solid #4b1e1e;
+    border-radius: 8px;
+    text-align: center;
+    color: #4b1e1e;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Animation */ @keyframes grow { 
+    0% { opacity: 0; transform: translateY(20px); 
+    } 100% { opacity: 1; transform: translateY(0); 
+    } 
+}

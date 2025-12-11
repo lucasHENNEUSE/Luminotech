@@ -96,6 +96,8 @@ select {
 /* Bouton en haut à droite */
 .top-right-button {
     position: absolute;
+    display:flex;
+    flex-direction: column;
     top: 20px;
     right: 20px;
     z-index:25;
@@ -103,6 +105,7 @@ select {
 
 .enter-button {
     padding: 8px 20px;
+    margin:4px;
     font-size: 1rem;
     background-color: #5a0c2c;
     color: white;

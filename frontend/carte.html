@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des régions viticoles</title>
+    <link rel="stylesheet" href="carte.css">
+</head>
+
+<body>
+
+<button class="back-button" onclick="window.location.href='app.html'">Retour</button>
+
+<header>
+    <h1>Carte des régions viticoles</h1>
+    <p>Passez votre souris sur un point pour explorer les vins</p>
+</header>
+
+<div class="map-container">
+
+    <img src="vignes8.png" alt="vignes8" class="map-image">
+
+    <!-- Points des régions -->
+    <div class="point" style="top: 90%; left: 90%;" data-name="Île-de-France"></div>
+    <div class="point" style="top: 43%; left: 46%;" data-name="Centre - Val de Loire"></div>
+    <div class="point" style="top: 40%; left: 53%;" data-name="Bourgogne"></div>
+    <div class="point" style="top: 47%; left: 60%;" data-name="Rhône"></div>
+    <div class="point" style="top: 60%; left: 63%;" data-name="Provence"></div>
+    <div class="point" style="top: 56%; left: 45%;" data-name="Nouvelle-Aquitaine (Bordeaux)"></div>
+    <div class="point" style="top: 28%; left: 60%;" data-name="Alsace"></div>
+    <div class="point" style="top: 52%; left: 52%;" data-name="Auvergne"></div>
+
+    
+</div>
+
+<script>
+const points = document.querySelectorAll(".point");
+const infoBox = document.getElementById("infoBox");
+
+points.forEach(p => {
+    p.addEventListener("mouseenter", () => {
+        infoBox.textContent = p.dataset.name;
+    });
+});
+
+document.addEventListener("mouseleave", () => {
+    infoBox.textContent = "Survolez un point…";
+});
+</script>
+
+</body>
+</html>
