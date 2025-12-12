@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Météo & Suggestions de Vin</title>
+    <link rel="stylesheet" href="meteo.css">
+</head>
+
+<body>
+
+<button class="back-button" onclick="window.location.href='app.html'">Retour</button>
+
+<h1 class="title">Météo & Suggestions de Vin</h1>
+
+<div class="location-box">
+    <input type="text" id="cityInput" placeholder="Entrez votre ville...">
+    <button id="searchBtn">Rechercher</button>
+</div>
+<p id="statusMsg" class="status-message"></p>
+
+<div class="cards-wrapper">
+
+    <!-- COLONNE AUJOURD'HUI -->
+    <div class="day-card">
+        <h2>Aujourd’hui</h2>
+
+        <p><strong>Température :</strong> <span id="tempToday">–</span></p>
+        <p><strong>Condition :</strong> <span id="condToday">–</span></p>
+        <p><strong>Vin conseillé :</strong> <span id="vinToday">–</span></p>
+        <p><strong>Conseil :</strong> <span id="advToday">–</span></p>
+        <p><strong>Critères supplémentaires :</strong></p>
+        <div class="critere-box" id="critToday">–</div>
+    </div>
+
+    <!-- COLONNE DEMAIN -->
+    <div class="day-card">
+        <h2>Demain</h2>
+
+        <p><strong>Température :</strong> <span id="tempTom">–</span></p>
+        <p><strong>Condition :</strong> <span id="condTom">–</span></p>
+        <p><strong>Vin conseillé :</strong> <span id="vinTom">–</span></p>
+        <p><strong>Conseil :</strong> <span id="advTom">–</span></p>
+        <p><strong>Critères supplémentaires :</strong></p>
+        <div class="critere-box" id="critTom">–</div>
+    </div>
+
+</div>
+
+<script src="meteo.js"></script>
+</body>
+</html>
