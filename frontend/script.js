@@ -26,6 +26,7 @@ async function login() {
 
     const data = await res.json();
     token = data.access_token;
+    
 
     return token;
 }

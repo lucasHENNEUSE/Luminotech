@@ -74,6 +74,7 @@ header h1 {
     background: rgba(255, 255, 255, 0.521);
     padding: 20px;
     border-radius: 12px;
+    border: 2px solid rgba(90,12,44,0.9);
     box-shadow: 0 8px 3px rgb(90, 12, 44);
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -121,3 +122,4 @@ select {
     transform: scale(1.05);
     background-color: #7c1840;
 }
+

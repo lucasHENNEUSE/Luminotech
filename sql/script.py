@@ -13,6 +13,16 @@ cursor = conn.cursor()
 
 # création des tables
 cursor.execute("""
+CREATE TABLE IF NOT EXISTS suggestons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    plat TEXT,
+    vin TEXT,
+    criteres TEXT,
+    created_at TEXT
+);
+""")
+
+cursor.execute("""
 CREATE TABLE IF NOT EXISTS plats (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom_plat TEXT,
@@ -115,11 +125,13 @@ conn.commit()
 count_vins = cursor.execute("SELECT COUNT(*) FROM vins").fetchone()[0]
 count_plats = cursor.execute("SELECT COUNT(*) FROM plats").fetchone()[0]
 count_accords = cursor.execute("SELECT COUNT(*) FROM accords_met_vin").fetchone()[0]
+count_suggestions = cursor.execute("SELECT COUNT(*) FROM suggestons").fetchone()[0]
 
-print(f"\nImport terminé avec succès !")
+print("\nImport terminé avec succès !")
 print(f"→ {count_vins} vins insérés dans la table 'vins'")
 print(f"→ {count_plats} plats insérés dans la table 'plats'")
 print(f"→ {count_accords} accords générés automatiquement\n")
+print(f"→ {count_suggestions} suggestions enregistrées dans la table 'suggestions'")
 
 # Aperçu des 5 premiers vins
 print("Exemple de vins insérés :")

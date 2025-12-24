@@ -15,7 +15,7 @@ body {
 
 .back-button {
     background: rgba(90,12,44,0.9);
-    color: rgba(255, 255, 255, 0.541);
+    color: rgb(255, 255, 255);
     border: none;
     padding: 10px 20px;
     border-radius: 12px;
@@ -38,6 +38,7 @@ body {
     width: 250px;
     border: 2px solid rgba(90,12,44,0.9);
     border-radius: 6px;
+    box-shadow: 0 3px 8px rgba(90,12,44,0.9);
 }
 
 .location-box button {
@@ -47,9 +48,10 @@ body {
     border-radius: 6px;
     cursor: pointer;
     animation: grow 4s ease forwards;
+    box-shadow: 0 3px 8px rgba(90,12,44,0.9);
 }
 .location-box button:hover {
-    background: rgba(90,12,44,0.9);
+    background: rgb(90, 12, 44);
 }
 
 .cards-wrapper {
@@ -59,12 +61,12 @@ body {
 }
 
 .day-card {
-    background: rgba(255, 245, 235, 0.322);
-    border: 2px solid rgba(90,12,44,0.9);
+    background: rgba(255, 245, 235, 0.507);
+    border: 2px solid rgb(99, 13, 49);
     border-radius: 12px;
     width: 320px;
     padding: 20px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    box-shadow: 3px 8px rgba(90,12,44,0.9);
     animation: grow 4s ease forwards;
 }
 

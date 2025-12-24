@@ -176,6 +176,56 @@ def delete_plat(id: int, token: str = Depends(require_token)):
 
     return {"message": f"Plat ID {id} supprimé"}
 
+# ================================================================
+# ROUTE : MENU DÉGUSTATION
+# ================================================================
+
+@app.get("/menu", tags=["menu"])
+def generer_menu(
+    saison: str,
+    meteo: str,
+    repas: str,
+    token: str = Depends(require_token)
+):
+    conn = get_db_connection()
+
+    criteres = f"{saison};{meteo};{repas}"
+
+    def get_plat(type_plat):
+        return conn.execute("""
+            SELECT * FROM plats
+            WHERE type_plat = ?
+            AND criteres LIKE ?
+            ORDER BY RANDOM()
+            LIMIT 1
+        """, (type_plat, f"%{criteres}%")).fetchone()
+
+    entree = get_plat("entrée")
+    plat = get_plat("plat")
+    fromage = get_plat("fromage")
+
+    if not plat:
+        conn.close()
+        raise HTTPException(404, "Aucun plat correspondant")
+
+    vin = conn.execute("""
+        SELECT vins.*
+        FROM accords_met_vin
+        JOIN vins ON accords_met_vin.vin_id = vins.id
+        WHERE accords_met_vin.plat_id = ?
+        ORDER BY RANDOM()
+        LIMIT 1
+    """, (plat["id"],)).fetchone()
+
+    conn.close()
+
+    return {
+        "entree": entree["nom_plat"] if entree else None,
+        "plat": plat["nom_plat"],
+        "fromage": fromage["nom_plat"] if fromage else None,
+        "vin": vin["nom_vin"] if vin else "Suggestion libre"
+    }
+
 
 # ================================================================
 # ROUTES : ACCORDS METS-VINS
@@ -249,3 +299,4 @@ def delete_accord(id: int, token: str = Depends(require_token)):
     conn.close()
 
     return {"message": f"Accord ID {id} supprimé"}
+

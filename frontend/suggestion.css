@@ -32,7 +32,7 @@ body {
 .fade-in-delay:nth-child(3) { animation-delay: 1.1s; }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(25px); }
+    from { opacity: 0;transform: translateY(25px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
@@ -159,3 +159,24 @@ body { background-image: url('./vignes6.png');
     /* évite la répétition */ background-attachment: fixed; 
     /* effet fixe pendant le scroll */ 
 }
+
+.enter-button {
+    padding: 8px 20px;
+    margin:4px;
+    font-size: 1rem;
+    background-color: rgb(128, 146, 49);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index:999;
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    top: 20px;
+    right: 20px;
+    z-index:25;
+}
+
