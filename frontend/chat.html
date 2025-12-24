@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sommelier IA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="chat.css">
+</head>
+
+<body>
+
+<button class="back-button" onclick="window.location.href='app.html'">Retour</button>
+
+    
+
+    <main class="chat-container">
+
+        <div class="chat-box" id="chatBox">
+            <div class="message ai">
+                Bonjour, je suis Bacchus IA, ton assistant sommelier virtuel ! <br>
+                Dis-moi quel est ton repas, le budget et le contexte.
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input 
+                id="userInput" 
+                type="text" 
+                placeholder="Ex : plat épicé, 10 personnes, budget 15€..."
+            >
+            <button class="send-btn" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+    </main>
+
+
+    <script src="chat.js"></script>
+</body>
+</html>
