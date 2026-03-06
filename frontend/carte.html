@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des régions viticoles</title>
+    <link rel="stylesheet" href="carte.css">
+</head>
+<body>
+
+<button class="back-button" onclick="window.location.href='app.html'">Retour</button>
+
+<header>
+    <h1>Carte des régions viticoles</h1>
+    <p>Cliquez sur un point pour découvrir les vins et spécialités locales</p>
+</header>
+
+<div class="map-container">
+    <img src="vignes8.png" alt="Carte de France" class="map-image">
+
+    <div class="point" style="top:40%; left:68%;" data-region="Bourgogne"></div>
+    <div class="point" style="top:65%; left:29%;" data-region="Bordeaux"></div>
+    <div class="point" style="top:28%; left:88%;" data-region="Alsace"></div>
+    <div class="point" style="top:80%; left:48%;" data-region="Provence"></div>
+    <div class="point" style="top:60%; left:72%;" data-region="Rhone"></div>
+    <div class="point" style="top:85%; left:86%;" data-region="Corse"></div>
+</div>
+
+<script src="carte.js"></script>
+</body>
+</html>

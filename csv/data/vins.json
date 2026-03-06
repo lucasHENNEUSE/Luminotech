@@ -1,0 +1,51 @@
+[
+  {
+    "nom": "Bourgogne Pinot Noir",
+    "saison": "hiver",
+    "meteo": "froid",
+    "repas": "copieux"
+  },
+  {
+    "nom": "Sancerre",
+    "saison": "été",
+    "meteo": "chaud",
+    "repas": "léger"
+  },
+    {
+        "nom": "Chablis",
+        "saison": "été",
+        "meteo": "chaud",
+        "repas": "léger"
+    },
+    {
+        "nom": "Châteauneuf-du-Pape",
+        "saison": "hiver",
+        "meteo": "froid",
+        "repas": "copieux"
+    },
+    {
+        "nom": "Rosé de Provence",
+        "saison": "été",
+        "meteo": "chaud",
+        "repas": "léger"
+    },
+    {
+        "nom": "Cabernet Sauvignon",
+        "saison": "hiver",
+        "meteo": "froid",
+        "repas": "copieux"
+    },
+    {
+        "nom": "Muscadet",
+        "saison": "été",
+        "meteo": "chaud",
+        "repas": "léger"
+    },
+    {
+        "nom": "Syrah",
+        "saison": "hiver",
+        "meteo": "froid", 
+        "repas": "copieux"
+    }
+]
+

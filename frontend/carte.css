@@ -1,0 +1,101 @@
+/* Base de la page */
+body { 
+    margin: 0;
+    padding: 0; 
+    text-align: center; 
+    font-family: 'Roboto', sans-serif; 
+    background: url('vignes7.png') center/cover fixed no-repeat; 
+}
+
+/* Conteneur de la carte */
+.map-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    margin: 40px auto;
+    animation: fadeIn 0.8s ease;
+}
+
+/* Image fixe (pas d'animation) */
+.map-image {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Style des points */
+.point {
+    width: 18px;
+    height: 18px;
+    background: #a04520;
+    border: 2px solid #4b1e1e;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* LA CASE (Infobulle) */
+/* Elle est cachée par défaut */
+.point::after {
+    content: attr(data-region); /* Récupère le nom de la région */
+    position: absolute;
+    bottom: 150%; /* Positionnée juste au-dessus du point */
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #4b1e1e;
+    padding: 8px 15px;
+    border: 2px solid #4b1e1e;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    
+    /* Invisibilité initiale */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+/* Petit triangle sous la case pour pointer vers le point */
+.point::before {
+    content: "";
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: #4b1e1e transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+/* AFFICHAGE AU SURVOL */
+.point:hover::after, 
+.point:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Bouton Retour */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background: rgba(90,12,44,0.9);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 30;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

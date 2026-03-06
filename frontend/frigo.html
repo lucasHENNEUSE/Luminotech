@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Mon Frigo Intelligent</h1>
+    
+    <div class="add-section">
+        <input type="text" id="newAliment" placeholder="Nom de l'aliment">
+        <button onclick="ajouterAliment()">Ajouter</button>
+        <link rel="stylesheet" href="frigo.css">
+    </div>
+
+    <table id="frigoTable">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll" onclick="toggleAll()"></th>
+                <th>Aliment</th>
+                <th>Ajouté le</th>
+                <th>État</th>
+            </tr>
+        </thead>
+        <tbody id="inventoryBody">
+            </tbody>
+    </table>
+
+<button class="btn-ia" onclick="window.location.href='./chat.html'">
+    Demander une recette à Bacchus IA
+</button>
+    <div id="recetteResultat" class="result-box"></div>
+</div>

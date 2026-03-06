@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accords Mets & Vins</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="top-right-button fade-in-delay">
+       <button class="enter-button" onclick="window.location.href='./suggestion.html'">
+    Faire une suggestion
+</button>
+
+ <button class="enter-button" onclick="window.location.href='./carte.html'">
+    Carte des régions viticoles
+</button>
+
+<button class="enter-button" onclick="window.location.href='meteo.html'">
+    Vin & Météo
+</button>
+
+<button class="enter-button" onclick="window.location.href='./menu.html'">
+    Proposition menu dégustation
+</button>
+
+<button class="enter-button" onclick="window.location.href='./frigo.html'">
+    Mon Frigo Intelligent
+</button>
+
+<button class="enter-button" onclick="window.location.href='./chat.html'">
+    Bacchus IA
+</button>
+
+    </div>
+<div class="fade-in page-wrapper">
+
+    
+
+    <header class="fade-in-delay">
+        <h1>Accord Mets & Vins</h1>
+        <p>Découvrez l’harmonie parfaite entre plats et vignobles</p>
+    </header>
+
+    <main class="container">
+
+        <div class="card choix fade-in-delay">
+            <h2>Choisir un vin</h2>
+            <select id="vinSelect">
+                <option value="">Sélectionnez un vin…</option>
+            </select>
+        </div>
+
+        <div class="card choix fade-in-delay">
+            <h2>Choisir un plat</h2>
+            <select id="platSelect">
+                <option value="">Sélectionnez un plat…</option>
+            </select>
+        </div>
+
+        <div class="card suggestion fade-in-delay">
+            <h2>Accords</h2>
+            <p id="suggestionText">Sélectionnez un vin ou un plat…</p>
+        </div>
+
+        <div class="card description fade-in-delay">
+            <h2>Description</h2>
+            <p id="descriptionText">La description apparaîtra ici…</p>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

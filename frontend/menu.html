@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu dégustation</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Proposition menu dégustation</h1>
+    <p>Proposition d'un menu accordé à la saison et à la météo</p>
+</header>
+
+<main class="container">
+
+    <div class="card">
+        <label>Saison</label>
+        <select id="season">
+            <option>Printemps</option>
+            <option>Été</option>
+            <option>Automne</option>
+            <option>Hiver</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <label>Météo</label>
+        <select id="weather">
+            <option>Ensoleillé</option>
+            <option>Pluvieux</option>
+            <option>Froid</option>
+            <option>Chaud</option>
+            <option>Neige</option>
+            <option>Nuageux</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <label>Type de repas</label>
+        <select id="meal">
+            <option>Déjeuner</option>
+            <option>Dîner</option>
+            <option>Repas léger</option>
+            <option>Romantique</option>
+            <option>Apéritif</option>
+            <option>Barbecue</option>
+            <option>Végétarien</option>
+            <option>Gourmet</option>
+            <option>Repas épicé</option>
+            <option>Repas festif</option>
+        </select>
+    </div>
+
+    <button id="generateBtn">Composer mon menu</button>
+
+    <div id="result" class="result hidden">
+        <h2>Votre menu dégustation</h2>
+        <p><strong>Entrée :</strong> <span id="starter"></span></p>
+        <p><strong>Plat :</strong> <span id="main"></span></p>
+        <p><strong>Fromage :</strong> <span id="cheese"></span></p>
+        <hr>
+        <p><strong>Vin conseillé :</strong> <span id="wine"></span></p>
+        <p class="advice" id="advice"></p>
+    </div>
+
+
+    <button class="back" onclick="window.location.href='app.html'">Retour</button>
+
+</main>
+
+<script src="menu.js"></script>
+</body>
+</html>

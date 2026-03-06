@@ -1,0 +1,96 @@
+[
+  {
+    "nom": "Saumon fumé",
+    "type": "entrée",
+    "saison": "été",
+    "repas": "léger",
+    "meteo": "chaud"
+  },
+  {
+    "nom": "Bœuf bourguignon",
+    "type": "plat",
+    "saison": "hiver",
+    "repas": "copieux",
+    "meteo": "froid"
+  },
+  {
+    "nom": "Fromage affiné",
+    "type": "fromage",
+    "saison": "hiver",
+    "repas": "copieux",
+    "meteo": "froid"
+  },
+
+    {
+        "nom": "Tarte aux fruits de saison",
+        "type": "dessert",
+        "saison": "été",
+        "repas": "léger",
+        "meteo": "chaud"
+    },
+    {
+        "nom": "Salade de quinoa",
+        "type": "entrée",
+        "saison": "été",
+        "repas": "léger",
+        "meteo": "chaud"
+    },
+    {
+        "nom": "Ratatouille",
+        "type": "plat",
+        "saison": "été",
+        "repas": "léger",
+        "meteo": "chaud"
+    },
+    {
+        "nom": "Crème brûlée",
+        "type": "dessert",
+        "saison": "hiver",
+        "repas": "copieux",
+        "meteo": "froid"
+    },
+    {
+        "nom": "Soupe à la citrouille",
+        "type": "entrée",
+        "saison": "hiver",
+        "repas": "copieux",
+        "meteo": "froid"
+    },
+    {
+        "nom": "Gratin dauphinois",
+        "type": "plat",
+        "saison": "hiver",
+        "repas": "copieux",
+        "meteo": "froid"
+    },
+    {
+        "nom": "Mousse au chocolat",
+        "type": "dessert",
+        "saison": "hiver",
+        "repas": "copieux",
+        "meteo": "froid"
+    },
+    {
+        "nom": "Bruschetta",
+        "type": "entrée",
+        "saison": "été",
+        "repas": "léger",
+        "meteo": "chaud"
+    },
+    {
+        "nom": "Poulet rôti aux herbes",
+        "type": "plat",
+        "saison": "été",
+        "repas": "léger",
+        "meteo": "chaud"
+    },
+    {
+        "nom": "Panna cotta aux fruits rouges",
+        "type": "dessert",
+        "saison": "été",
+        "repas": "léger",
+        "meteo": "chaud"
+    }
+]
+
+    

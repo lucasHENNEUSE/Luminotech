@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_vins
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vins
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./data_mysql:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer_vins
+    restart: always
+    ports:
+      - 8081:8080
