@@ -35,8 +35,7 @@ class Refrigerateur:
                 item.consomme = True
 
     def envoyer_alerte_email(self, nom_aliment):
-        expediteur = "lucas.henneuse22@gmail.com"
-        destinataire = "lucas.henneuse22@gmail.com"
+
         load_dotenv()
         mot_de_passe = os.getenv("GMAIL_APP_PASSWORD")
 
