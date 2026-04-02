@@ -3,7 +3,6 @@ name: CI/CD Pipeline - Tests
 on:
   push:
     branches: ["main", "master", "CI/CD"]
-
   pull_request:
     branches: ["main", "master", "CI/CD"]
 
@@ -30,3 +29,24 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
           pytest
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/CI/CD'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & Push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: oceluc/luminotech:latest
